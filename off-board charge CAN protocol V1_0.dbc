@@ -1,0 +1,297 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: Off_board_charger BMS
+VAL_TABLE_ SPN_timing_state 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_TABLE_ ID_result 1 "yes" 0 "no" ;
+VAL_TABLE_ normal 1 "off normal" 0 "normal" ;
+VAL_TABLE_ chger_normal_end 3 "normal end" 1 "manual operation end" 0 "off normal end" ;
+VAL_TABLE_ by_who 3 "offboard_charger_end_first" 0 "bms_end_first" ;
+VAL_TABLE_ end_normal 3 "normal end" 0 "off-normal end" ;
+VAL_TABLE_ match 1 "mismatch" 0 "match" ;
+VAL_TABLE_ fault 1 "fault" 0 "no fault" ;
+VAL_TABLE_ chging_mode 2 "constant current" 1 "constant voltage" ;
+VAL_TABLE_ chging_prepare_stat_chger 255 "invalid" 170 "complete preparation" 0 "not prepared" ;
+VAL_TABLE_ chging_prepare_stat 255 "invalid" 170 "prepared" 0 "not prepared" ;
+VAL_TABLE_ bat_type 255 "other" 6 "Li£¨NiCoMn£©O2" 5 "LiCoO2" 4 "LiMn2O4" 3 "Lifepo4" 2 "Ni-MH battery" 1 "lead-acid battery" ;
+VAL_TABLE_ if_overtime 1 "overtime" 0 "not overtime" ;
+VAL_TABLE_ if_achieve 1 "achieve" 0 "not achieve" ;
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ SPN2576_BMS_version : 0|64@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPN3089 : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPN3087_1_4 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ SPN3084_voltage : 0|12@1+ (0.01,0) [0|40.95] "" Vector__XXX
+ SG_ SPN3084_13_16 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ SPN2562_chger_position : 0|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SPN2561_num_charger_plug : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ SPN_5_bytes : 0|5@1- (1,0) [0|0] "" Vector__XXX
+ SG_ SPN2820_max_charging_temp : 0|8@1+ (1,-40) [-40|210] "" Vector__XXX
+ SG_ SPN2819_max_chging_pack_voltage : 0|16@1+ (0.1,0) [0|6553.5] "" Vector__XXX
+ SG_ SPN2818_max_charging_capacity : 0|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ SPN3080_Estimated_time_fullchg : 0|8@1+ (1,0) [0|250] "min" Vector__XXX
+ SG_ SPN3079_soc : 0|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ SPN3078_cell_max_temp : 0|8@1+ (1,-50) [-50|200] "deg" Vector__XXX
+ SG_ SPN3077_cell_min_temp : 0|8@1+ (1,-50) [-50|200] "deg" Vector__XXX
+ SG_ SPN3076_charging_current : 0|16@1+ (0.1,-800) [-800|500] "A" Vector__XXX
+ SG_ SPN3075_charging_voltage : 0|16@1+ (0.1,0) [0|800] "V" Vector__XXX
+
+BO_ 2552714996 BHM: 2 Vector__XXX
+ SG_ SPN2601_max_voltge_allowance : 0|16@1+ (0.1,0) [0|1000] "" Vector__XXX
+
+BO_ 2552689750 CHM: 3 Vector__XXX
+ SG_ SPN2600_protocol_version : 0|24@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2283795542 CEM: 4 Off_board_charger
+ SG_ SPN3927_bcm_BSD_timeout : 24|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3926_bcm_BST_timeout : 20|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3925_bcm_BCL_timeout : 18|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3924_bcm_BCS_timeout : 16|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3923_bcm_BRO_timeout : 10|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3922_bcm_BCP_timeout : 8|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3921_bcm_BRM_timeout : 0|2@1- (1,0) [0|2] "" Vector__XXX
+
+BO_ 2283689716 BEM: 4 BMS
+ SG_ SPN3907_chg_CSD_timeout : 24|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3906_chg_CST_timeout : 18|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3905_chg_CCS_timeout : 16|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3904_chg_CRO_timeout : 10|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3903_chg_CML_timeout : 8|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3902_chg_CRM_2560_AA_timeout : 2|2@1- (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3901_chg_CRM_2560_timeout : 0|2@1- (1,0) [0|2] "" Vector__XXX
+
+BO_ 2632668916 TP_DT_BCM_to_CHG: 8 Vector__XXX
+
+BO_ 2632734452 TP_CM_BCM_to_CHG: 8 Vector__XXX
+
+BO_ 2632709206 TP_DT_CHG_to_BCM: 8 Vector__XXX
+
+BO_ 2632774742 TP_CM_CHG_to_BCM: 8 Vector__XXX
+
+BO_ 2550658134 CTS: 7 Off_board_charger
+ SG_ SPN2823_Timer_sec : 0|8@1+ (1,0) [0|0] ""  BMS
+ SG_ SPN2823_Timer_min : 8|8@1+ (1,0) [0|0] ""  BMS
+ SG_ SPN2823_Timer_hour : 16|8@1+ (1,0) [0|0] ""  BMS
+ SG_ SPN2823_Timer_Year : 40|16@1+ (1,0) [0|65535] ""  BMS
+ SG_ SPN2823_Timer_Month : 32|8@1+ (1,0) [1|12] ""  BMS
+ SG_ SPN2823_Timer_Day : 24|8@1+ (1,0) [1|31] ""  BMS
+
+BO_ 2550552308 BCP__13_bytes: 8 BMS
+ SG_ SPN2567_Rated_capacity : 32|16@1+ (0.1,0) [0|1000] "Ah" Vector__XXX
+ SG_ SPN2817_max_charging_current : 16|16@1+ (0.1,-800) [-800|0] "" Vector__XXX
+ SG_ SPN2816_max_module_voltage : 0|16@1+ (0.01,0) [0|600] "V" Vector__XXX
+
+BO_ 2552099926 CSD: 5 Off_board_charger
+ SG_ SPN2560_num_offboard_charger : 32|8@1+ (1,0) [0|255] ""  BMS
+ SG_ SPN3178_output_energy : 16|16@1+ (0.1,0) [0|1000] "kWh"  BMS
+ SG_ SPN3177_chging_time : 0|16@1+ (1,0) [0|600] "min"  BMS
+
+BO_ 2551994100 BSD: 7 BMS
+ SG_ SPN3174_cell_min_temp : 40|8@1+ (1,-50) [-50|200] "deg" Vector__XXX
+ SG_ SPN3175_cell_max_temp : 48|8@1+ (1,-50) [-50|200] "deg" Vector__XXX
+ SG_ SPN3173_cell_max_voltage : 24|16@1+ (0.01,0) [0|24] "V"  Off_board_charger
+ SG_ SPN3172_cell_min_voltage : 8|16@1+ (0.01,0) [0|24] "V"  Off_board_charger
+ SG_ SPN3171_final_soc : 0|8@1+ (1,0) [0|100] "%"  Off_board_charger
+
+BO_ 2417685590 CST: 4 Off_board_charger
+ SG_ SPN3523_volt_error : 26|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3523_current_mismatch : 24|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3522_other_fault : 18|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3522_chg_emergency_stop : 16|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3522_energy_not_accessed : 14|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3522_chg_internal_over_temp : 12|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3522_chg_conn_fault : 10|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3522_chg_over_temp : 8|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3521_fault_cease : 4|2@1+ (1,0) [0|2] ""  BMS
+ SG_ SPN3521_manual_cease : 2|2@1+ (1,0) [0|2] ""  BMS
+ SG_ SPN3521_chg_cease_set : 0|2@1+ (1,0) [0|2] ""  BMS
+
+BO_ 2417579764 BST: 4 BMS
+ SG_ SPN3511_charge_cease : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ SPN3512_point2_fault : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ SPN3512_relay_fault : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ SPN3512_other_fault : 22|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3513_bms_vol_mismatch : 26|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3513_overcurrent : 24|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3512_pack_over_temp : 16|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3512_hv_isolation : 8|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3512_connector_overtemp : 10|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3512_chg_conn_overtemp : 14|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3512_bms_overtemp : 12|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3511_if_bms_soc_set : 0|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3511_if_packVoltage_set : 2|2@1+ (1,0) [0|2] ""  Off_board_charger
+ SG_ SPN3511_if_cellvoltage_set : 4|2@1+ (1,0) [0|2] ""  Off_board_charger
+
+BO_ 2551379030 CCS: 7 Off_board_charger
+ SG_ SPN3929_charge_permitted : 48|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ SPN3083_cumulated_chging_time : 32|16@1+ (1,0) [0|600] "min"  BMS
+ SG_ SPN3082_act_output_current : 16|16@1+ (0.1,-400) [-400|0] "A"  BMS
+ SG_ SPN3081_act_output_voltage : 0|16@1+ (0.1,0) [0|750] "V"  BMS
+
+BO_ 2551273204 BCS__9_bytes: 8 BMS
+
+BO_ 2551207668 BCL: 5 BMS
+ SG_ SPN3074_offcharger_chging_Mode : 32|8@1+ (1,0) [0|0] ""  Off_board_charger
+ SG_ SPN3073_required_Current : 16|16@1+ (0.1,-400) [-400|0] "A"  Off_board_charger
+ SG_ SPN3072_required_Voltage : 0|16@1+ (0.1,0) [0|750] "V"  Off_board_charger
+
+BO_ 2416637014 CRO: 1 Off_board_charger
+ SG_ SPN2830_offcharger_pre_status : 0|8@1+ (1,0) [0|0] ""  BMS
+
+BO_ 2416531188 BRO: 1 BMS
+ SG_ SPN2829_BMS_chging_pre_status : 0|8@1+ (1,0) [0|0] ""  Off_board_charger
+
+BO_ 2550723670 CML: 8 Off_board_charger
+ SG_ SPN2827_minimum_current : 48|16@1+ (0.1,-400) [0|0] "A" Vector__XXX
+ SG_ SPN2826_Max_output_Current : 32|16@1+ (0.1,-400) [-400|0] "A"  BMS
+ SG_ SPN2824_Max_output_Voltage : 0|16@1+ (0.1,0) [0|750] "V"  BMS
+ SG_ SPN2825_Min_output_Voltage : 16|16@1+ (0.1,0) [0|750] "V"  BMS
+
+BO_ 2551404276 BSM: 7 BMS
+ SG_ SPN3089_min_temp_num : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ SPN3096_charge_allowed : 52|2@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ SPN3095_HV_conn_stat : 50|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3094_isolation_status : 48|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3093_over_temp : 46|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3092_over_current : 44|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3091_soc_over_high_or_low : 42|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3090_cell_over_high_or_low : 40|2@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ SPN3088_min_temp : 24|8@1+ (1,-50) [-50|200] "" Vector__XXX
+ SG_ SPN3087_max_temp_num : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ SPN3086_max_temp : 8|8@1+ (1,-50) [-50|200] "" Vector__XXX
+ SG_ SPN3085_max_volt_num : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 2550264918 CRM: 8 Off_board_charger
+ SG_ SPN2560_charger_num : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPN2563_ID_feedback_result : 0|8@1+ (1,0) [0|0] ""  BMS
+
+BO_ 2550290164 BRM__41_bytes: 8 BMS
+ SG_ SPN2568_Rated_voltage : 48|16@1+ (0.1,0) [0|750] "V" Vector__XXX
+ SG_ SPN2567_Rated_capacity : 32|16@1+ (0.1,0) [0|1000] "Ah" Vector__XXX
+ SG_ SPN2566_Battery_Type : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPN2565_Version : 0|24@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 SPN2576_BMS_version "BMS version information, reserved.
+Byte 7£¬Byte6£¬Byte5  reserved, fill with 0xFFFFFF
+Byte 4£¬Byte3£¬Byte2£¬Byte1    software release time information
+Byte 0   software serial number
+";
+CM_ SG_ 2552714996 SPN2601_max_voltge_allowance "allowance charge maximum voltage of battery£¬ factor: 0.1 offset:0";
+CM_ SG_ 2552689750 SPN2600_protocol_version "fast charge protocol version£¬0x010001 -- V1.1";
+CM_ SG_ 2550723670 SPN2827_minimum_current "minimum output current from charger
+factor 0.1  offset -400A";
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Periodic","Immediate","Sporadic","NotUsed","NotUsed","NotUsed","NotUsed","IfActive","NoMsgSendType";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 0;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "GenMsgSendType" "NoMsgSendType";
+BA_DEF_DEF_  "GenMsgCycleTime" 100;
+BA_DEF_DEF_  "BusType" "";
+BA_ "BusType" "CAN";
+BA_ "GenMsgSendType" BO_ 2283795542 0;
+BA_ "GenMsgCycleTime" BO_ 2283795542 250;
+BA_ "GenMsgSendType" BO_ 2283689716 0;
+BA_ "GenMsgCycleTime" BO_ 2283689716 250;
+BA_ "GenMsgCycleTime" BO_ 2550658134 500;
+BA_ "GenMsgSendType" BO_ 2550658134 0;
+BA_ "GenMsgCycleTime" BO_ 2550552308 500;
+BA_ "GenMsgSendType" BO_ 2550552308 0;
+BA_ "GenMsgSendType" BO_ 2552099926 0;
+BA_ "GenMsgCycleTime" BO_ 2552099926 250;
+BA_ "GenMsgSendType" BO_ 2551994100 0;
+BA_ "GenMsgCycleTime" BO_ 2551994100 250;
+BA_ "GenMsgSendType" BO_ 2417685590 0;
+BA_ "GenMsgCycleTime" BO_ 2417685590 10;
+BA_ "GenMsgSendType" BO_ 2417579764 0;
+BA_ "GenMsgCycleTime" BO_ 2417579764 10;
+BA_ "GenMsgSendType" BO_ 2551379030 0;
+BA_ "GenMsgCycleTime" BO_ 2551379030 50;
+BA_ "GenMsgSendType" BO_ 2551273204 0;
+BA_ "GenMsgCycleTime" BO_ 2551273204 250;
+BA_ "GenMsgSendType" BO_ 2551207668 0;
+BA_ "GenMsgCycleTime" BO_ 2551207668 50;
+BA_ "GenMsgSendType" BO_ 2416637014 0;
+BA_ "GenMsgCycleTime" BO_ 2416637014 250;
+BA_ "GenMsgSendType" BO_ 2416531188 0;
+BA_ "GenMsgCycleTime" BO_ 2416531188 250;
+BA_ "GenMsgSendType" BO_ 2550723670 0;
+BA_ "GenMsgCycleTime" BO_ 2550723670 250;
+BA_ "GenMsgCycleTime" BO_ 2551404276 250;
+BA_ "GenMsgSendType" BO_ 2551404276 0;
+BA_ "GenMsgCycleTime" BO_ 2550264918 250;
+BA_ "GenMsgSendType" BO_ 2550264918 0;
+BA_ "GenMsgSendType" BO_ 2550290164 0;
+BA_ "GenMsgCycleTime" BO_ 2550290164 250;
+VAL_ 2283795542 SPN3927_bcm_BSD_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283795542 SPN3926_bcm_BST_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283795542 SPN3925_bcm_BCL_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283795542 SPN3924_bcm_BCS_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283795542 SPN3923_bcm_BRO_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283795542 SPN3922_bcm_BCP_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283795542 SPN3921_bcm_BRM_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283689716 SPN3907_chg_CSD_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283689716 SPN3906_chg_CST_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283689716 SPN3905_chg_CCS_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283689716 SPN3904_chg_CRO_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283689716 SPN3903_chg_CML_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283689716 SPN3902_chg_CRM_2560_AA_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2283689716 SPN3901_chg_CRM_2560_timeout 2 "Invalid" 1 "Timeout" 0 "Normal" ;
+VAL_ 2417685590 SPN3521_fault_cease 1 "fault" 0 "no fault" ;
+VAL_ 2417685590 SPN3521_manual_cease 1 "achieve" 0 "not achieve" ;
+VAL_ 2417685590 SPN3521_chg_cease_set 1 "achieve" 0 "not achieve" ;
+VAL_ 2417579764 SPN3511_charge_cease 2 "Unusable" 1 "Charge cease" 0 "normal" ;
+VAL_ 2417579764 SPN3512_point2_fault 2 "Unusable" 1 "fault" 0 "normal" ;
+VAL_ 2417579764 SPN3512_relay_fault 2 "UnUsable" 1 "Fault" 0 "Normal" ;
+VAL_ 2417579764 SPN3512_other_fault 2 "Unusable" 1 "achieve" 0 "not achieve" ;
+VAL_ 2417579764 SPN3513_bms_vol_mismatch 1 "mismatch" 0 "match" ;
+VAL_ 2417579764 SPN3513_overcurrent 1 "achieve" 0 "not achieve" ;
+VAL_ 2417579764 SPN3512_pack_over_temp 2 "Unusable" 1 "fault" 0 "no fault" ;
+VAL_ 2417579764 SPN3512_hv_isolation 2 "Unusable" 1 "fault" 0 "no fault" ;
+VAL_ 2417579764 SPN3512_connector_overtemp 2 "Unusable" 1 "fault" 0 "no fault" ;
+VAL_ 2417579764 SPN3512_chg_conn_overtemp 2 "Unusable" 1 "fault" 0 "no fault" ;
+VAL_ 2417579764 SPN3512_bms_overtemp 2 "Unusable" 1 "fault" 0 "no fault" ;
+VAL_ 2417579764 SPN3511_if_bms_soc_set 1 "achieve" 0 "not achieve" ;
+VAL_ 2417579764 SPN3511_if_packVoltage_set 3 "normal end" 0 "off-normal end" ;
+VAL_ 2417579764 SPN3511_if_cellvoltage_set 1 "achieve" 0 "not achieve" ;
+VAL_ 2551379030 SPN3929_charge_permitted 1 "Charge Allowance" 0 "Charge Pause" ;
+VAL_ 2551207668 SPN3074_offcharger_chging_Mode 2 "constant current mode" 1 "constant voltage mode" ;
+VAL_ 2416637014 SPN2830_offcharger_pre_status 255 "invalid" 170 "complete preparation" 0 "not prepare" ;
+VAL_ 2416531188 SPN2829_BMS_chging_pre_status 255 "invalid" 170 "complete preparation" 0 "not prepared" ;
+VAL_ 2550264918 SPN2563_ID_feedback_result 170 "feedback_pass" 0 "feedback_fail" ;
+VAL_ 2550290164 SPN2566_Battery_Type 7 "Polymer Lithium-ion battery" 255 "other" 6 "Li£¨NiCoMn£©O2" 5 "LiCoO2" 4 "LiMn2O4" 3 "Lifepo4" 2 "Ni-MH battery" 1 "lead-acid battery" ;
+
