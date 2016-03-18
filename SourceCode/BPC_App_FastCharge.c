@@ -29,30 +29,30 @@
 ** Global Variable define
 ********************************************************************************/
 // message enable flag define
-static uint8_t bem_msg_enable;
-static uint8_t bhm_msg_enable;
-static uint8_t brm_msg_enable;
-static uint8_t bcp_msg_enable;
-static uint8_t bro_msg_enable;
-static uint8_t bcl_msg_enable;
-static uint8_t bcs_msg_enable;
-static uint8_t bst_msg_enable;
-static uint8_t bsd_msg_enable;
+static bool_t bem_msg_enable;
+static bool_t bhm_msg_enable;
+static bool_t brm_msg_enable;
+static bool_t bcp_msg_enable;
+static bool_t bro_msg_enable;
+static bool_t bcl_msg_enable;
+static bool_t bcs_msg_enable;
+static bool_t bst_msg_enable;
+static bool_t bsd_msg_enable;
 
 // fast charger message receive flag
 
-static uint8_t chm_msg_received;
-static uint8_t crm_msg_received;
-static uint8_t cml_msg_received;
-static uint8_t cro_msg_received;
-static uint8_t ccs_msg_received;
-static uint8_t csd_msg_received;
+static bool_t chm_msg_received;
+static bool_t crm_msg_received;
+static bool_t cml_msg_received;
+static bool_t cro_msg_received;
+static bool_t ccs_msg_received;
+static bool_t csd_msg_received;
 
 // fast charger CAN signal
 
-uint8_t SPN2560_ID_feedback_result;
-uint8_t SPN2829_BMS_chging_pre_status;
-uint8_t SPN2830_offcharger_pre_status;
+static uint8_t SPN2560_ID_feedback_result;
+static uint8_t SPN2829_BMS_chging_pre_status;
+static uint8_t SPN2830_offcharger_pre_status;
 
 // bem signal variable define
 static uint8_t bem_crm_timeout;
@@ -63,23 +63,172 @@ static uint8_t bem_ccs_timeout;
 static uint8_t bem_cst_timeout;
 static uint8_t bem_csd_timeout;
 
-static float32_t ccs_timer;
-static uint8_t   fastchg_restart_needed;
-void Initialize_FastChg(void)
+/*************************************************************************/
+/* Private Function Prototypes (declare as static) */
+/*************************************************************************/
+static void Process_FastChg_CANRx(void);
+static void Process_FastChg_CANTx(uint32_t dt_ms);
+static void Process_FastChg_Cease(void);
+static void Process_FastChg_Management(uint32_t dt_ms, bool_t init);
+/*************************************************************************/
+/* Functions */
+/*************************************************************************/
+
+
+/*************************************************************************
+** Function: LoopMe
+** Parameter(In):  
+					value   current index
+					limit   loop range
+** Parameter(Out):
+					uint16_t  loop result
+** Description:
+**************************************************************************/
+uint16_t LoopMe(uint16_t value, uint16_t limit)
+{
+
+    if ( ++value > limit )
+    {
+        value = 0;
+    }
+
+    return(value);
+
+}
+
+
+/*************************************************************************
+** Function: FastChg_Initialize
+** Parameter(In):  None
+** Parameter(Out): None
+** Description: initialize fast charge parameters
+**************************************************************************/
+void FastChg_Initialize(void)
+{
+	bem_msg_enable = FALSE;
+	bhm_msg_enable = FALSE;
+	brm_msg_enable = FALSE;
+	bcp_msg_enable = FALSE;
+	bro_msg_enable = FALSE;
+	bcl_msg_enable = FALSE;
+	bcs_msg_enable = FALSE;
+	bst_msg_enable = FALSE;
+	bsd_msg_enable = FALSE;
+	
+	chm_msg_received = FALSE;
+	crm_msg_received = FALSE;
+	cml_msg_received = FALSE;
+	cro_msg_received = FALSE;
+	ccs_msg_received = FALSE;
+	csd_msg_received = FALSE;
+	
+	bem_crm_timeout       = COMM_TIMEOUT_INVALID;
+	bem_crm_pass_timeout  = COMM_TIMEOUT_INVALID;
+	bem_cml_timeout       = COMM_TIMEOUT_INVALID;
+	bem_cro_timeout       = COMM_TIMEOUT_INVALID;
+	bem_ccs_timeout       = COMM_TIMEOUT_INVALID;
+	bem_cst_timeout       = COMM_TIMEOUT_INVALID;
+	bem_csd_timeout       = COMM_TIMEOUT_INVALID;
+	
+	SPN2560_ID_feedback_result      = BMS_RECOGNIZE_INVALID;
+	SPN2829_BMS_chging_pre_status   = PREPARESTAT_INVALID;
+	SPN2830_offcharger_pre_status   = PREPARESTAT_INVALID;
+  }
+
+ 
+/*************************************************************************
+** Function: Process_FastChg_CANRx
+** Parameter(In):  None
+** Parameter(Out): None
+** Description: receive fast charger CAN messages, called every 10ms
+**************************************************************************/
+static void Process_FastChg_CANRx(void)
+{
+	//TODO: read can messages
+}
+
+/*************************************************************************
+** Function: Process_FastChg_CANTx
+** Parameter(In):  
+					dt_ms  delta timer
+** Parameter(Out): None
+** Description: transfer fast charger CAN messages
+**************************************************************************/
+static void Process_FastChg_CANTx(uint32_t dt_ms)
+{
+	static uint32_t loop_tmr =   0u;
+	static uint8_t  taskloop =   0u;
+	loop_tmr += dt_ms;
+	if(dt_ms > 10u)
+	{
+		//TODO: add 10ms cycle tx task;
+		switch (taskloop)
+		{
+			case 0:
+			case 5:
+			case 10:
+			case 15:
+			case 20:
+			case 25:
+			case 30:
+			case 35:
+			case 40:
+			case 45:
+				//TODO: add 50ms task
+				break;
+			case 1:
+			case 26:
+			    //TODO: add 250ms task
+				break;
+			case 2:
+				//TODO: add 500ms task
+				break;
+			default:
+				break;
+		}
+		taskloop = (uint8_t)LoopMe(taskloop, 50);
+		loop_tmr = 0u;
+	}
+	else
+	{
+		/* do nothing */
+	}
+}
+
+
+/*************************************************************************
+** Function: Process_FastChg_Cease
+** Parameter(In):  None
+** Parameter(Out): None
+** Description: Determin charge ceases, include battery pack cease and fast
+                charger cease
+**************************************************************************/
+static void Process_FastChg_Cease(void)
 {
 
 }
 
-void Process_FastChg_Management(float dt_ms, const char init)
+/*************************************************************************
+** Function: Process_FastChg_Management
+** Parameter(In):
+					dt_ms   delta time
+					init    function initial requirements
+** Parameter(Out):  None
+** Description: Fast charge main state machine
+**************************************************************************/
+static void Process_FastChg_Management(uint32_t dt_ms, bool_t init)
 {
-	static enum_fast_chg_step next_step ;
-	static enum_fast_chg_step last_step ;
-	
-	static float_32t step_tmr;
+	static enum_fast_chg_step       next_step ;
+	static enum_fast_chg_step       last_step ;
+	static float32_t                ccs_timer;
+	static bool_t                   fastchg_restart_needed;
+	static float_32t                step_tmr;
 	
 	if(TRUE == init)
 	{  /* fast charge process management parameter initialize */
-        step_tmr = 0.0f;
+        step_tmr  = 0.0f;
+		ccs_timer = 0.0f;
+		fastchg_restart_needed = FALSE;
 		next_step = FASTCHG_STEP_HANDSHAKE_WAIT_CHM;
 		last_step = FASTCHG_STEP_CHARGE_DONE;
 		
@@ -126,6 +275,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 				crm_msg_received = FALSE;
 				bhm_msg_enable = FALSE;
 				brm_msg_enable = TRUE;
+				fastchg_restart_needed = FALSE;
 				next_step = FASTCHG_STEP_HANDSHAKE_WAIT_CRM_AA;
 			}
 			else
@@ -165,7 +315,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 				}
 				else
 				{
-					
+					/* do nothing */
 				}
 			}
 			break;
@@ -205,7 +355,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 				}
 				else
 				{
-					
+					/* do nothing */
 				}
 			}
 			break;
@@ -227,7 +377,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 				}
 				else
 				{
-					
+					/* do nothing */
 				}
 			}
 			break;
@@ -253,7 +403,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 				}
 				else
 				{
-					
+					/* do nothing */
 				}
 			}
             //TODO: check charge done
@@ -263,7 +413,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 			}
 			else
 			{
-				
+				/* do nothing */
 			}
 			//TODO: check battery cease and charger cease
 			if(# cease request#)
@@ -272,7 +422,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 			}
 			else
 			{
-				
+				/* do nothing */
 			}
 			break;
 			
@@ -294,7 +444,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 			}
 			else
 			{
-				
+				/* do nothing */
 			}
 			break;
 			
@@ -303,7 +453,7 @@ void Process_FastChg_Management(float dt_ms, const char init)
 			bsd_msg_enable = TRUE;
 			if(TRUE == csd_msg_received)
 			{
-				
+				/* charge done */
 			}
 			else
 			{
@@ -314,12 +464,13 @@ void Process_FastChg_Management(float dt_ms, const char init)
 				}
 				else
 				{
-					
+					/* do nothing */
 				}
 			}
 			//TODO: other charge end process
 			break;
 			default:
+				/* do nothing */
 			break;
 		}
 		if(last_step != next_step)
@@ -330,4 +481,15 @@ void Process_FastChg_Management(float dt_ms, const char init)
 		last_step = next_step;
 		
 	}
+
+	
+/*************************************************************************
+** Function: FastChg_main
+** Parameter(In):   None
+** Parameter(Out):  None
+** Description: Fast charge main function interface, called by OS
+**************************************************************************/
+void FastChg_main(void)
+{
+	
 }
